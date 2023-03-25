@@ -1,0 +1,83 @@
+import { Box, Flex, Text, Image } from "@chakra-ui/react"
+import { FaCheck } from "react-icons/fa"
+// import NavigationBar from '../../components/Navigation/NavigationBar.component';
+
+export default function CreateEventCTA({ step, setStep }: { step: number; setStep: any }) {
+  const steps = [1, 2, 3, 4, 5]
+
+  return (
+    <>
+      <Box
+        backgroundColor={`#4158D0`}
+        backgroundImage={`linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%)`}
+        backgroundSize="cover"
+        backgroundRepeat="no-repeat"
+        position="relative"
+        overflow="hidden"
+        overflowX="hidden"
+        h="60"
+      >
+        <Box textAlign="center" color="white" pb="10" mt="6" mb="6" zIndex={2} position="relative">
+          <Flex justify="center" ml="12" mt={16}>
+            <Text
+              textAlign="center"
+              fontFamily="azonix"
+              fontSize={{ base: "4xl", lg: "4xl", xl: "5xl" }}
+            >
+              CREATE EVENT
+            </Text>
+            <Image
+              w={{ base: "6", lg: "8" }}
+              ml="1"
+              mt="-16"
+              src="/image/sparkle_gradient.svg"
+              alt="element"
+            />
+          </Flex>
+        </Box>
+      </Box>
+      <Flex justify="center" w="full" position="absolute" zIndex={0}>
+        <Box
+          w="fit-content"
+          bg="white"
+          rounded="full"
+          transform="translateY(-28px)"
+          boxShadow="0px 18px 91px rgba(0, 0, 0, 0.07)"
+          border="1px"
+          borderColor="blackAlpha.200"
+          p="2"
+        >
+          <Flex gridGap="4">
+            {steps.map((data, key) => (
+              <Flex
+                w="10"
+                h="10"
+                key={key}
+                cursor="pointer"
+                _hover={{
+                  transform: step > data - 1 ? "scale(1.05)" : "",
+                }}
+                onClick={() => {
+                  if (step > data - 1) {
+                    setStep(key)
+                  }
+                }}
+                bg={step === data - 1 ? "brand.purple" : step > data - 1 ? "brand.green" : "white"}
+                rounded="full"
+                justify="center"
+                align="center"
+                border="2px"
+                fontSize="xl"
+                fontWeight="medium"
+                borderColor="blackAlpha.300"
+                color={step >= data - 1 ? "white" : "blackAlpha.300"}
+              >
+                {step > data - 1 ? <FaCheck /> : `${data}`}
+              </Flex>
+            ))}
+          </Flex>
+        </Box>
+      </Flex>
+    </>
+  )
+}
