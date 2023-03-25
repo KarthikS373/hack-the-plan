@@ -1,3 +1,8 @@
+import { useState } from "react"
+import { FaChevronDown } from "react-icons/fa"
+import { HiOutlineChevronRight as ChevronRight } from "react-icons/hi"
+import { MdCalendarToday as CalendarToday } from "react-icons/md"
+
 import {
   Box,
   Button,
@@ -17,14 +22,13 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react"
-import { MdCalendarToday as CalendarToday } from "react-icons/md"
-import { HiOutlineChevronRight as ChevronRight } from "react-icons/hi"
-import { useState } from "react"
-import { FaChevronDown } from "react-icons/fa"
+
 import EventCard from "../../atoms/card/event-card"
+
 import DateModal from "./date-picker-modal"
 export type PaymentMode = "Option 1" | "Option 2" | "Option 3"
-export default function Step1({ onSubmit }: { onSubmit: Function }) {
+
+const Step1 = ({ onSubmit }: { onSubmit: (e: any) => void }) => {
   const [isPaid, setIsPaid] = useState(true)
   const [isUnlimited, setIsUnlimited] = useState(false)
   const [formDetails, setFormDetails] = useState({
@@ -164,7 +168,6 @@ export default function Step1({ onSubmit }: { onSubmit: Function }) {
                     },
                   })
                 }}
-                // isChecked={isInviteOnly}
                 id="price"
                 colorScheme="linkedin"
               />
@@ -549,28 +552,34 @@ export default function Step1({ onSubmit }: { onSubmit: Function }) {
                 previewOnly
                 event={{
                   id: "",
-                  childAddress: "",
                   title: formDetails.title || "Untitled",
-                  description: {
-                    short_desc: "Event description goes here",
+                  childAddress: "",
+                  category: {
+                    category: [formDetails.category.category[0] || "category"],
+                    event_type: formDetails.category.event_type || "type",
                   },
                   image: {
                     image: "/image/gradient.png",
                     gallery: [],
                   },
-                  date: formDetails.date ? formDetails.date : "1/1/2000",
                   eventHost: "",
+                  fee: Number(formDetails.fee),
+                  date: formDetails.date ? formDetails.date : "1/1/2000",
+                  description: {
+                    short_desc: "Event description goes here",
+                    long_desc: "",
+                  },
+                  seats: formDetails.seats || 20,
                   owner: "",
-                  type: formDetails.category.event_type || "type",
-                  category: {
-                    category: [formDetails.category.category[0] || "category"],
-                    event_type: formDetails.category.event_type || "type",
+                  venue: {
+                    name: "Venue name",
+                    x: 0,
+                    y: 0,
                   },
                   buyers: [],
-                  fee: Number(formDetails.fee),
-                  seats: formDetails.seats || 20,
                   tickets_available: formDetails.seats || 20,
                   tickets_sold: 0,
+                  type: formDetails.category.event_type || "type",
                 }}
               />
             </Box>
@@ -621,3 +630,5 @@ export default function Step1({ onSubmit }: { onSubmit: Function }) {
     </form>
   )
 }
+
+export default Step1

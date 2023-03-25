@@ -27,7 +27,7 @@
 1. Clone the News-Unchained project from GitHub
 
 ```
-    git clone https://github.com/KarthikS373/NewsUnchained.git
+    git clone https://github.com/KarthikS373/hack-the-plan
 ```
 
 2. Once the project is cloned, navigate into the project directory and run the following command to install all the necessary dependencies:

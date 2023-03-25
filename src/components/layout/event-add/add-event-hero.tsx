@@ -1,8 +1,13 @@
-import { Box, Flex, Text, Image } from "@chakra-ui/react"
 import { FaCheck } from "react-icons/fa"
-// import NavigationBar from '../../components/Navigation/NavigationBar.component';
 
-export default function CreateEventCTA({ step, setStep }: { step: number; setStep: any }) {
+import { Box, Flex, Image, Text } from "@chakra-ui/react"
+
+interface CreateEventCTAProps {
+  step: number
+  setStep: Action<number>
+}
+
+const CreateEventCTA = ({ step, setStep }: CreateEventCTAProps) => {
   const steps = [1, 2, 3, 4, 5]
 
   return (
@@ -81,3 +86,5 @@ export default function CreateEventCTA({ step, setStep }: { step: number; setSte
     </>
   )
 }
+
+export default CreateEventCTA

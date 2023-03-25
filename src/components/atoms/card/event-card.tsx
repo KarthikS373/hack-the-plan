@@ -1,20 +1,18 @@
-import { AspectRatio, Box, Flex, Image, Link, Text } from "@chakra-ui/react"
 import moment from "moment"
+import NextImage from "next/image"
 import { useRouter } from "next/router"
 import { FaStar } from "react-icons/fa"
 import twoDigit from "two-digit"
-import { Event } from "../../../types/event"
-import * as NextImage from "next/image"
-export default function EventCard({
-  event,
-  isFeatured = false,
-}:
-{
-  event: Event
+
+import { AspectRatio, Box, Flex, Image, Link, Text } from "@chakra-ui/react"
+
+interface EventCardProps {
+  event: Events
   isFeatured?: boolean
   previewOnly?: boolean
-  props?: {}
-}) {
+}
+
+const EventCard = ({ event, isFeatured = false }: EventCardProps) => {
   const router = useRouter()
   const months = [
     "JAN",
@@ -98,24 +96,12 @@ export default function EventCard({
           {event.fee === 0 ? (
             <>
               FREE
-              <Image
-                ml={2}
-                src={"/images/coin.png"}
-                w="3"
-                filter="brightness(100%)"
-                alt="cost"
-              />
+              <Image ml={2} src={"/images/coin.png"} w="3" filter="brightness(100%)" alt="cost" />
             </>
           ) : (
             <>
-              <Image
-                src={"/images/coin.png"}
-                w="3"
-                filter="brightness(100%)"
-                alt="cost"
-              />
+              <Image src={"/images/coin.png"} w="3" filter="brightness(100%)" alt="cost" />
               <Text>
-                {" "}
                 <>{event.fee}</>
               </Text>
             </>
@@ -131,8 +117,6 @@ export default function EventCard({
         </Box>
       </Flex>
       <AspectRatio ratio={428.42 / 180.98} w="full" bg="gray.100">
-        {/* 
-  // @ts-ignore */}
         <NextImage
           loading="lazy"
           layout="fill"
@@ -180,7 +164,7 @@ export default function EventCard({
             <Flex
               color="blackAlpha.700"
               fontSize={{ base: "10px", xl: "xs" }}
-              gridGap='1'
+              gridGap="1"
               mb="1"
               align="center"
               justify={event.venue ? "space-evenly" : "flex-start"}
@@ -244,9 +228,7 @@ export default function EventCard({
               boxShadow="0px 6.36032px 39.752px rgba(0, 0, 0, 0.07)"
             >
               {event.seats - event.tickets_sold > 0 ? (
-                <Flex
-                gridGap='1'
-                >
+                <Flex gridGap="1">
                   {event.seats >= 10000000 ? null : (
                     <>
                       <Text
@@ -265,10 +247,7 @@ export default function EventCard({
                   )}
                 </Flex>
               ) : (
-                <Flex
-                  align="center"
-                  gridGap='1'
-                >
+                <Flex align="center" gridGap="1">
                   <Flex
                     color="white"
                     ml="-1.5"
@@ -306,3 +285,5 @@ export default function EventCard({
     </Flex>
   )
 }
+
+export default EventCard

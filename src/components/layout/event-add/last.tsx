@@ -1,20 +1,21 @@
-import { Box, Button, Flex, Text, useDisclosure } from "@chakra-ui/react"
-
 import { HiOutlineChevronRight as ChevronRight } from "react-icons/hi"
+
+import { Box, Button, Flex, Text } from "@chakra-ui/react"
+
+import EventCard from "../../atoms/card/event-card"
+
 import "@uiw/react-md-editor/markdown-editor.css"
 import "@uiw/react-markdown-preview/markdown.css"
-import EventCard from "../../atoms/card/event-card"
-import dynamic from "next/dynamic"
 
-export default function SubmitStep({
+const SubmitStep = ({
   event,
   onSubmit,
   inTxn,
 }: {
-  event: any
-  onSubmit: Function
+  event: Events
+  onSubmit: GenericFunction
   inTxn: boolean
-}) {
+}) => {
   return (
     <>
       <form
@@ -45,8 +46,7 @@ export default function SubmitStep({
               </Box>
             </Box>
           </Flex>
-          {/* @ts-ignore */}
-          <Box align="center" mt="10" mb="20">
+          <Box textAlign="center" mt="10" mb="20">
             <Button
               size="lg"
               rounded="full"
@@ -82,3 +82,5 @@ export default function SubmitStep({
     </>
   )
 }
+
+export default SubmitStep

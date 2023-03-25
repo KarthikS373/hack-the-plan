@@ -1,3 +1,8 @@
+import { useContext, useEffect, useState } from "react"
+import { FaChevronDown } from "react-icons/fa"
+import { HiOutlineChevronRight as ChevronRight } from "react-icons/hi"
+import { useRecoilValue } from "recoil"
+
 import {
   Box,
   Button,
@@ -14,19 +19,21 @@ import {
   MenuList,
   Text,
 } from "@chakra-ui/react"
-import { useRecoilValue } from "recoil"
-import { FaChevronDown } from "react-icons/fa"
-import { HiOutlineChevronRight as ChevronRight } from "react-icons/hi"
+
+import { inviteOnlyAtom } from "../../../lib/recoil/atoms"
+import VenueAutoComplete from "../../misc/location-auto-complete"
+
 import "@uiw/react-md-editor/markdown-editor.css"
 import "@uiw/react-markdown-preview/markdown.css"
-import { useContext, useEffect, useState } from "react"
-import { inviteOnlyAtom } from "../../../lib/recoil/atoms"
-import VenueAutoComplete from "../../Misc/location-complete"
 
-export default function Step4({ event, onSubmit }: { event: any; onSubmit: Function }) {
+interface Props {
+  event: any
+  onSubmit: (...e: any[]) => void
+}
+
+const Step4 = ({ event, onSubmit }: Props): JSX.Element => {
   const isInviteOnly = useRecoilValue(inviteOnlyAtom)
   const [_link, setLink] = useState<string>("")
-  const [ensName, setEnsName] = useState<string>("")
   const [venue, setVenue] = useState<"Self Hosted" | "In Person">("Self Hosted")
   const [venueXY, setVenueXY] = useState({
     name: "",
@@ -259,3 +266,5 @@ export default function Step4({ event, onSubmit }: { event: any; onSubmit: Funct
     </>
   )
 }
+
+export default Step4
