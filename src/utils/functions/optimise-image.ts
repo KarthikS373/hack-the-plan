@@ -1,22 +1,7 @@
 import axios from "axios"
-import { create } from "ipfs-http-client"
 import moment from "moment"
 
-import { IPFS_CLIENT_PROJECT, IPFS_CLIENT_SECRET } from "../constants/env"
-
-const projectId = IPFS_CLIENT_PROJECT
-const projectSecret = IPFS_CLIENT_SECRET
-
-const auth = "Basic " + Buffer.from(projectId + ":" + projectSecret).toString("base64")
-
-const ipfs = create({
-  host: "ipfs.infura.io",
-  port: 5001,
-  protocol: "https",
-  headers: {
-    authorization: auth,
-  },
-})
+import ipfs from "../../lib/ipfs"
 
 const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
 
