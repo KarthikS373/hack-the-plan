@@ -1,6 +1,6 @@
 import { FaCheck } from "react-icons/fa"
 
-import { Box, Flex, Image, Text } from "@chakra-ui/react"
+import { Box, Flex, Image, Text, Link } from "@chakra-ui/react"
 
 interface CreateEventCTAProps {
   step: number
@@ -14,7 +14,7 @@ const CreateEventCTA = ({ step, setStep }: CreateEventCTAProps) => {
     <>
       <Box
         backgroundColor={`#4158D0`}
-        backgroundImage={`linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%)`}
+        backgroundImage={`linear-gradient( 64.3deg,  rgba(254,122,152,0.81) 17.7%, rgba(255,206,134,1) 64.7%, rgba(172,253,163,0.64) 112.1% )`}
         backgroundSize="cover"
         backgroundRepeat="no-repeat"
         position="relative"
@@ -22,6 +22,17 @@ const CreateEventCTA = ({ step, setStep }: CreateEventCTAProps) => {
         overflowX="hidden"
         h="60"
       >
+        <Link href="/">
+          <Image
+            src="/logo3.png"
+            alt="web3vents logo"
+            paddingLeft="md"
+            marginX="auto"
+            cursor="pointer"
+            mx="5"
+            my="3"
+          />
+        </Link>
         <Box textAlign="center" color="white" pb="10" mt="6" mb="6" zIndex={2} position="relative">
           <Flex justify="center" ml="12" mt={16}>
             <Text

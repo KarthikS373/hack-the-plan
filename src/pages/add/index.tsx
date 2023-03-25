@@ -10,6 +10,7 @@ import Hero from "../../components/layout/event-add/add-event-hero"
 import First from "../../components/layout/event-add/first"
 import EventCreatedModal from "../../components/modals/created-event"
 import { stepAtom } from "../../lib/recoil/atoms"
+import Navbar from "../../components/layout/navbar"
 
 const Second = dynamic(() => import("../../components/layout/event-add/second"), {
   ssr: false,
@@ -77,7 +78,7 @@ const Create: NextPage = () => {
       />
       <Box position="absolute" minH="100vh" w="full" h="full" overflow="scroll" overflowX="hidden">
         <Hero step={step} setStep={setStep} />
-        <Box mt="6">
+        <Box mt="20">
           <Box display={step === 0 ? "block" : "none"}>
             <First
               onSubmit={(formDetails: any) => {

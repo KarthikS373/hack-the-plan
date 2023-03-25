@@ -40,10 +40,10 @@ const DateModal = ({ isOpen, onClose, onSubmit }: DateModalProps) => {
   })
   const [tz, setTz] = useState(Intl.DateTimeFormat().resolvedOptions().timeZone)
 
-  useMemo(() => {
-    const tzValue = tz
-    setStartDateTime(moment(startDateTime.toString()).tz(tzValue))
-  }, [startDateTime, tz])
+  // useMemo(() => {
+  //   const tzValue = tz
+  //   setStartDateTime(moment(startDateTime.toString()).tz(tzValue))
+  // }, [startDateTime, tz])
 
   useEffect(() => {
     const durationToAdd = moment.duration(duration)
