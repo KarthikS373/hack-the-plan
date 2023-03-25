@@ -1,11 +1,10 @@
 import { atom } from "recoil"
-import { formType } from "../../types/event-form"
 
 const defaultFormData: formType = {
   preDefinedQues: [
-    { val: "Name", isRequired: true, id: 1 },
-    { val: "Email Address", isRequired: true, id: 2 },
-    { val: "Wallet Address", isRequired: true, id: 3 },
+    { value: "Name", isRequired: true, id: 1 },
+    { value: "Email Address", isRequired: true, id: 2 },
+    { value: "Wallet Address", isRequired: true, id: 3 },
   ],
   customQues: [],
 }
@@ -15,6 +14,7 @@ interface DisclosureProps {
   onOpen: () => void
   onClose: () => void
 }
+
 const stepAtom = atom<number>({
   key: "stepAtom",
   default: 0,
@@ -29,6 +29,7 @@ const formDetails = atom<formType>({
   key: "registerFormDetails",
   default: defaultFormData,
 })
+
 const dropDownForm = atom<any[]>({
   key: "dropdownForm",
   default: [],
@@ -38,13 +39,18 @@ const updateOnce = atom<boolean>({
   key: "updateOnce",
   default: false,
 })
+
 const navDisclosure = atom<DisclosureProps>({
   key: "navDisclosure",
   default: {
     isOpen: false,
-    onOpen: () => {},
-    onClose: () => {},
+    onOpen: () => {
+      console.log()
+    },
+    onClose: () => {
+      console.log()
+    },
   },
 })
 
-export { stepAtom, inviteOnlyAtom, formDetails, updateOnce, dropDownForm, navDisclosure }
+export { dropDownForm, formDetails, inviteOnlyAtom, navDisclosure, stepAtom, updateOnce }

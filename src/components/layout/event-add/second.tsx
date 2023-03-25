@@ -1,11 +1,17 @@
+import { useState } from "react"
+import dynamic from "next/dynamic"
+import { HiOutlineChevronRight as ChevronRight } from "react-icons/hi"
+
 import { Box, Button, Flex, FormControl, FormLabel, Image, Input, Text } from "@chakra-ui/react"
 
-import { HiOutlineChevronRight as ChevronRight } from "react-icons/hi"
-import dynamic from "next/dynamic"
-import { useState } from "react"
 import EventCard from "../../atoms/card/event-card"
 
-export default function Step2({ event, onSubmit }: { onSubmit: Function; event: any }) {
+interface Props {
+  onSubmit: GenericFunction
+  event: Events
+}
+
+const Step2 = ({ event, onSubmit }: Props) => {
   const [description, setDescription] = useState("")
   const [longDescription, setLongDescription] = useState("")
 
@@ -159,3 +165,5 @@ export default function Step2({ event, onSubmit }: { onSubmit: Function; event: 
     </form>
   )
 }
+
+export default Step2

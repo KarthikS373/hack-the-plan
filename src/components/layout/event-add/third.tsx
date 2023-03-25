@@ -1,8 +1,12 @@
+import { useState } from "react"
+import Dropzone from "react-dropzone"
+import { FaTrash, FaYoutube } from "react-icons/fa"
+import { HiOutlineChevronRight, HiUpload } from "react-icons/hi"
+
 import {
   AspectRatio,
   Box,
   Button,
-  Divider,
   Flex,
   FormControl,
   FormLabel,
@@ -10,42 +14,27 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
-  InputRightElement,
-  Menu,
-  MenuButton,
-  MenuDivider,
-  MenuItem,
-  MenuList,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Select,
   Spinner,
-  Switch,
   Text,
   useDisclosure,
   useToast,
 } from "@chakra-ui/react"
 
-import "@uiw/react-md-editor/markdown-editor.css"
-import "@uiw/react-markdown-preview/markdown.css"
-import dynamic from "next/dynamic"
-import { useContext, useState } from "react"
-import { FaTrash, FaYoutube } from "react-icons/fa"
-import Dropzone from "react-dropzone"
-import { HiOutlineChevronRight, HiUpload } from "react-icons/hi"
 import {
+  generateTicket,
   getBuffer,
-  getBlob,
   uploadToCloudinary,
-  genTicket,
 } from "../../../utils/functions/optimise-image"
 
-export default function Step3({ event, onSubmit }: { onSubmit: Function; event: any }) {
+import "@uiw/react-md-editor/markdown-editor.css"
+import "@uiw/react-markdown-preview/markdown.css"
+
+interface Props {
+  onSubmit: GenericFunction
+  event: Events
+}
+
+const Step3 = ({ event, onSubmit }: Props) => {
   const [formDetails, setFormDetails] = useState<any>({
     slides: [],
     image: "",
@@ -138,14 +127,14 @@ export default function Step3({ event, onSubmit }: { onSubmit: Function; event: 
                         image: "",
                       })
                       setLoading1(true)
-                      let data = await getBuffer(acceptedFiles[0])
-                      let res: string = await uploadToCloudinary(acceptedFiles[0])
+                      const data = await getBuffer(acceptedFiles[0])
+                      const res: string = await uploadToCloudinary(acceptedFiles[0])
                       setFormDetails({
                         ...formDetails,
                         image: res,
                         slides: [...formDetails.slides],
                       })
-                      let { fastimg } = await genTicket(
+                      const { fastimg } = await generateTicket(
                         event.title,
                         1,
                         res,
@@ -171,7 +160,7 @@ export default function Step3({ event, onSubmit }: { onSubmit: Function; event: 
                         _focus={{
                           borderColor: "blue.300",
                         }}
-                        gridGap='4'
+                        gridGap="4"
                         direction="column"
                         align="center"
                         justify="center"
@@ -277,11 +266,7 @@ export default function Step3({ event, onSubmit }: { onSubmit: Function; event: 
                   <Spinner w="6" h="6" />
                 </Box>
               )}
-              <Flex
-                alignItems="end"
-                gridGap='4'
-                w="full"
-              >
+              <Flex alignItems="end" gridGap="4" w="full">
                 <AspectRatio
                   ratio={16 / 9}
                   w="full"
@@ -296,12 +281,12 @@ export default function Step3({ event, onSubmit }: { onSubmit: Function; event: 
                   {image ? (
                     <Dropzone
                       onDrop={async (acceptedFiles) => {
-                        let files: any = [...formDetails.slides]
+                        const files: any = [...formDetails.slides]
 
                         acceptedFiles.forEach(async (data, key) => {
                           setLoading2(true)
-                          let bytedata = await getBuffer(data)
-                          let res: string = await uploadToCloudinary(data)
+                          const bytedata = await getBuffer(data)
+                          const res: string = await uploadToCloudinary(data)
                           setFormDetails({
                             ...formDetails,
                             image: formDetails.image
@@ -350,11 +335,11 @@ export default function Step3({ event, onSubmit }: { onSubmit: Function; event: 
                   ) : (
                     <Dropzone
                       onDrop={async (acceptedFiles) => {
-                        let files: any = [...formDetails.slides]
+                        const files: any = [...formDetails.slides]
                         acceptedFiles.forEach(async (data, key) => {
                           setLoading2(true)
-                          let bytedata = await getBuffer(data)
-                          let res: string = await uploadToCloudinary(data)
+                          const bytedata = await getBuffer(data)
+                          const res: string = await uploadToCloudinary(data)
                           setFormDetails({
                             ...formDetails,
                             image: formDetails.image
@@ -487,7 +472,7 @@ export default function Step3({ event, onSubmit }: { onSubmit: Function; event: 
                               bottom="2"
                               right="2"
                               onClick={() => {
-                                let newSlides: any = []
+                                const newSlides: any = []
                                 let k = 0
                                 formDetails.slides.forEach((slide: any, index: number) => {
                                   if (slide === data) {
@@ -516,12 +501,12 @@ export default function Step3({ event, onSubmit }: { onSubmit: Function; event: 
                         ) : (
                           <Dropzone
                             onDrop={async (acceptedFiles) => {
-                              let files: any = [...formDetails.slides]
+                              const files: any = [...formDetails.slides]
 
                               acceptedFiles.forEach(async (data, key) => {
                                 setLoading2(true)
-                                let bytedata = await getBuffer(data)
-                                let res: string = await uploadToCloudinary(data)
+                                const bytedata = await getBuffer(data)
+                                const res: string = await uploadToCloudinary(data)
 
                                 setFormDetails({
                                   ...formDetails,
@@ -592,3 +577,5 @@ export default function Step3({ event, onSubmit }: { onSubmit: Function; event: 
     </form>
   )
 }
+
+export default Step3

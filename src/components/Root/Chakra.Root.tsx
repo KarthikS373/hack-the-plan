@@ -1,21 +1,25 @@
-import { ChakraProvider } from '@chakra-ui/react';
-import { AppProps } from 'next/app';
-import NextNProgress from 'nextjs-progressbar';
-import React from 'react';
-// import ChatwootWidget from '../Elements/Chatwoot.component';
-import theme from '../../styles/theme.chakra';
+import React from "react"
+import NextProgress from "nextjs-progressbar"
 
-function Chakra({ Component, pageProps }: any) {
+import { ChakraProvider } from "@chakra-ui/react"
+
+import theme from "../../styles/theme.chakra"
+
+interface ChakraProviderProps {
+  Component: any
+  pageProps: any
+  children?: React.ReactNode
+}
+
+const Chakra = ({ Component, pageProps }: ChakraProviderProps) => {
   return (
     <>
       <ChakraProvider theme={theme}>
-        {/* <ChatwootWidget /> */}
-        <NextNProgress color='#6451FB' />
-
+        <NextProgress color="#6451FB" />
         <Component {...pageProps} />
       </ChakraProvider>
     </>
-  );
+  )
 }
 
-export default Chakra;
+export default Chakra

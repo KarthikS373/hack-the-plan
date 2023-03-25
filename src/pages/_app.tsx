@@ -1,19 +1,20 @@
+import type { AppProps } from "next/app"
+import dynamic from "next/dynamic"
+import NextProgress from "nextjs-progressbar"
+import { RecoilRoot } from "recoil"
+
 import "../styles/globals.css"
 import "mapbox-gl/dist/mapbox-gl.css"
-import type { AppProps } from "next/app"
-import { RecoilRoot } from "recoil"
-import dynamic from "next/dynamic"
 
-import NextNProgress from "nextjs-progressbar"
-const Chakra = dynamic(() => import("../components/Root/Chakra.Root"))
-function MyApp({ Component, pageProps }: AppProps) {
+const ChakraProvider = dynamic(() => import("../components/root/chakra.root"))
+
+const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <RecoilRoot>
-        <Chakra Component={Component} pageProps={pageProps}>
-          {" "}
-          <NextNProgress color="#6451FB" />
-        </Chakra>
+        <ChakraProvider Component={Component} pageProps={pageProps}>
+          <NextProgress color="#6451FB" />
+        </ChakraProvider>
       </RecoilRoot>
     </>
   )

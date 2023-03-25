@@ -1,10 +1,16 @@
-import { Box } from "@chakra-ui/react"
+import { useState } from "react"
 import type { NextPage } from "next"
 import dynamic from "next/dynamic"
 import Head from "next/head"
-import { useState } from "react"
+import { useRecoilState } from "recoil"
+
+import { Box } from "@chakra-ui/react"
+
 import Hero from "../../components/layout/event-add/add-event-hero"
 import First from "../../components/layout/event-add/first"
+import EventCreatedModal from "../../components/modals/created-event"
+import { stepAtom } from "../../lib/recoil/atoms"
+
 const Second = dynamic(() => import("../../components/layout/event-add/second"), {
   ssr: false,
 })
@@ -18,12 +24,7 @@ const LastStep = dynamic(() => import("../../components/layout/event-add/last"),
   ssr: false,
 })
 
-import { useRecoilState, useRecoilValue } from "recoil"
-import { inviteOnlyAtom, stepAtom, formDetails, dropDownForm } from "../../lib/recoil/atoms"
-import EventCreatedModal from "../../components/Modals/created-event"
-
-import { Event, VenueType } from "../../types/event"
-const eventData: Event = {
+const eventData: Events = {
   id: "",
   title: "",
   childAddress: "",
@@ -56,7 +57,7 @@ const eventData: Event = {
 
 const Create: NextPage = () => {
   const [step, setStep] = useRecoilState(stepAtom)
-  const [event, setEvent] = useState<Event>(eventData)
+  const [event, setEvent] = useState<Events>(eventData)
   const [eventLink, setEventLink] = useState<any>(undefined)
   const [txnId, setTxnId] = useState<string | null>(null)
   const [isPublished, setIsPublished] = useState(false)
@@ -115,7 +116,7 @@ const Create: NextPage = () => {
           <Box display={step === 3 ? "block" : "none"}>
             <Fourth
               event={event}
-              onSubmit={(link: any, huddle: boolean, venue: VenueType) => {
+              onSubmit={(link: any, huddle: boolean, venue: Coordinates) => {
                 setStep(4)
                 setEvent({
                   ...event,
@@ -127,7 +128,13 @@ const Create: NextPage = () => {
           </Box>
 
           <Box display={step === 4 ? "block" : "none"}>
-            <LastStep event={event} inTxn={inTxn} onSubmit={() => {}} />
+            <LastStep
+              event={event}
+              inTxn={inTxn}
+              onSubmit={() => {
+                console.log("Submitting")
+              }}
+            />
           </Box>
         </Box>
       </Box>
