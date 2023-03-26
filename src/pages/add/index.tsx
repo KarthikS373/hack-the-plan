@@ -8,9 +8,9 @@ import { Box } from "@chakra-ui/react"
 
 import Hero from "../../components/layout/event-add/add-event-hero"
 import First from "../../components/layout/event-add/first"
+import Navbar from "../../components/layout/navbar"
 import EventCreatedModal from "../../components/modals/created-event"
 import { stepAtom } from "../../lib/recoil/atoms"
-import Navbar from "../../components/layout/navbar"
 
 const Second = dynamic(() => import("../../components/layout/event-add/second"), {
   ssr: false,
@@ -133,6 +133,8 @@ const Create: NextPage = () => {
               event={event}
               inTxn={inTxn}
               onSubmit={() => {
+                // TODO: Add event to database
+                console.log(event)
                 console.log("Submitting")
               }}
             />
